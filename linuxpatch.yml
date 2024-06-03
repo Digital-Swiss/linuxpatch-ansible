@@ -1,0 +1,41 @@
+---
+- name: Download, run linuxpatch.com install script and manage service
+  hosts: all
+  become: yes
+  vars:
+    api_key: "your_api_key_here"
+
+  tasks:
+    - name: Check if /opt/linuxpatch/bin/linuxpatch exists
+      stat:
+        path: /opt/linuxpatch/bin/linuxpatch
+      register: linuxpatch_file
+
+    - name: Download install.sh from linuxpatch.com
+      get_url:
+        url: https://linuxpatch.com/install.sh
+        dest: /tmp/install.sh
+        mode: '0755'
+      when: not linuxpatch_file.stat.exists
+
+    - name: Run install.sh with API_KEY as environment variable
+      command: /tmp/install.sh
+      environment:
+        API_KEY: "{{ api_key }}"
+      args:
+        chdir: /tmp
+      when: not linuxpatch_file.stat.exists
+      register: install_result
+
+    - name: Clean up install.sh
+      file:
+        path: /tmp/install.sh
+        state: absent
+      when: not linuxpatch_file.stat.exists and install_result is succeeded
+
+    - name: Ensure linuxpatch-agent service is running and enabled
+      service:
+        name: linuxpatch-agent
+        state: started
+        enabled: yes
+      when: linuxpatch_file.stat.exists or install_result is succeeded
