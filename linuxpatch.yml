@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   vars:
-    api_key: "your_api_key_here"
+    lp_key: "your_lp_key_here"
 
   tasks:
     - name: Check if /opt/linuxpatch/bin/linuxpatch exists
@@ -18,10 +18,10 @@
         mode: '0755'
       when: not linuxpatch_file.stat.exists
 
-    - name: Run install.sh with API_KEY as environment variable
+    - name: Run install.sh with LP_KEY as environment variable
       command: /tmp/install.sh
       environment:
-        API_KEY: "{{ api_key }}"
+        LP_KEY: "{{ lp_key }}"
       args:
         chdir: /tmp
       when: not linuxpatch_file.stat.exists
