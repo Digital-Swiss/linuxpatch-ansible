@@ -20,6 +20,10 @@ LinuxPatch.com stands out in the market due to its robust features and user-frie
 
 5. **Scalability**: Whether you are managing a few servers or thousands, LinuxPatch.com scales effortlessly to meet the needs of your growing infrastructure.
 
+6. **Cost-Effective**: LinuxPatch.com offers a pay-as-you-go model, allowing you to manage your Linux systems without the need for extensive upfront investments.
+
+7. **Self-hosted**: LinuxPatch.com offers a self-hosted solution, meaning you can host it on your own servers or infrastructure.
+
 ### Integration with Ansible
 
 LinuxPatch.com can be seamlessly integrated with Ansible to automate the installation and management of the LinuxPatch agent and service. Ansible, a powerful IT automation tool, can deploy the LinuxPatch agent across multiple servers with ease. By using an Ansible playbook, you can ensure that the LinuxPatch agent is installed only when necessary, reducing redundant tasks and saving valuable time.
@@ -38,6 +42,7 @@ Incorporating LinuxPatch.com into your IT operations can significantly enhance t
 ## Variables
 
 - `api_key`: The API key required for the script execution. You should replace the placeholder with your actual API key.
+- `lp_url`: The URL of the linuxpatch.com installation script.
 
 ## Usage
 

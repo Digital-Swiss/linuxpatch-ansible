@@ -4,6 +4,7 @@
   become: yes
   vars:
     lp_key: "your_lp_key_here"
+    lp_url: "https://linuxpatch.com/"
 
   tasks:
     - name: Check if /opt/linuxpatch/bin/linuxpatch exists
@@ -13,7 +14,7 @@
 
     - name: Download install.sh from linuxpatch.com
       get_url:
-        url: https://linuxpatch.com/install.sh
+        url: "{{ lp_url }}/install.sh"
         dest: /tmp/install.sh
         mode: '0755'
       when: not linuxpatch_file.stat.exists
