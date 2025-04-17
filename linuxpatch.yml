@@ -1,9 +1,8 @@
 ---
 - name: Download, run linuxpatch.com install script and manage service
-  hosts: all
+  hosts: linuxpatch_servers
   become: yes
   vars:
-    lp_key: "your_lp_key_here"
     lp_url: "https://linuxpatch.com/"
 
   tasks:
